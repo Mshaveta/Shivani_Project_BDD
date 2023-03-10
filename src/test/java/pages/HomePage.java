@@ -1,26 +1,23 @@
 package pages;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.google.inject.Inject;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import support.Core;
 
-public class HomePage {
-    private By ContactUsLink = By.xpath("//span[text()='CONTACT US']");
+public class HomePage extends BasePage{
 
-    public WebDriver driver;
+    @FindBy(xpath="//span[text()='CONTACT US']")
+    private WebElement contactUsLink;
 
-    public WebDriver launchApplication(String appURL){
-        WebDriverManager.chromedriver().setup();
-        driver =  new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(appURL);
-        return driver;
+    @Inject
+    public HomePage(Core core) {
+        super(core);
     }
 
-    public void clickOnContactUsLink(WebDriver driver) {
-        driver.findElement(ContactUsLink).click();
+    public void clickOnContactUsLink() {
+       contactUsLink.click();
     }
 
 }
